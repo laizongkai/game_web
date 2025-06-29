@@ -1,0 +1,1 @@
+import{u as n,q as r}from"./index-CMFezg7R.js";async function g(e,t){let a=`http://localhost:8000/selling?start_date=${e}&end_date=${t}`;const{data:s,message:l,error:o}=await r(a);return{selling:s,message:l,error:o}}async function i(e){const{data:t,message:a,error:s}=await n("http://localhost:8000/selling","POST",e);return console.log(t),{product:t,message:a}}export{g,i as p};

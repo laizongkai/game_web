@@ -1,0 +1,1 @@
+import{n as t,a as o,b as n,m as s}from"./index-CMFezg7R.js";const c={},r={class:"d-flex flex-col justify-center align-center"};function l(a,e){return s(),o("div",r,e[0]||(e[0]=[n("h1",null," Not Found ",-1),n("h1",null," 404 ",-1)]))}const _=t(c,[["render",l]]);export{_ as default};
