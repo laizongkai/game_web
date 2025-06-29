@@ -1,24 +1,5 @@
 version: '3.8'
 services:
-  backend:
-    build: ./Server
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    environment:
-      DATABASE_URL: postgresql://postgres:admin@db:5432/web
-
-  frontend:
-    build: ./UI # Path to your Vue.js Dockerfile
-    ports:
-      - "80:80"
-    depends_on:
-      - backend # Ensures backend starts before frontend
-    volumes: # Optional, for development
-      - .:/app
-      - /app/node_modules
-
   db:
     image: postgres:13
     ports:
@@ -29,6 +10,28 @@ services:
       POSTGRES_PASSWORD: admin
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    build: ./Server
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:admin@db:5432/web
+    restart: always
+
+  frontend:
+    build: ./UI # Path to your Vue.js Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend # Ensures backend starts before frontend
+    volumes: # Optional, for development
+      - .:/app
+      - /app/node_modules
+    restart: always
 
 volumes:
   postgres_data:
