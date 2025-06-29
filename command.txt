@@ -1,0 +1,32 @@
+
+docker pull postgres
+
+docker create --name postgres -p 5050:5432 -e POSTGRES_PASSWORD=admin postgres
+
+docker start postgres
+
+
+#------------- Database -----------------
+docker run --name postgres -d \
+    --restart=always \
+    -e POSTGRES_PASSWORD=admin\
+    -p 5432:5432 \
+    postgres:latest
+
+docker exec -it postgres psql -U postgres -c "create database web"
+
+docker run --name postgres -d \
+    --restart=always \
+    -p 5432:5432 \
+    -v ~/Postgres:/var/lib/postgresql/data 
+    -e POSTGRES_DB=web 
+    -e POSTGRES_USER=postgres 
+    -e POSTGRES_PASSWORD='admin' 
+    postgres:latest
+
+
+docker build -t fastapi-app .
+docker run --name=fastapi-app -d -p 8000:8000 fastapi-app
+
+
+
