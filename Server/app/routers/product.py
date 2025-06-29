@@ -53,7 +53,7 @@ async def Get_Products(db:Session = Depends(product_data_db), product_name: str 
             )
 
             return_list.append(dict(resp))
-
+        return_list.reverse()
         return JSONResponse({'data':return_list, 'message':'OK'}, 200)
 
     except Exception as err:
